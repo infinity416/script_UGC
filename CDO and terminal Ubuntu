@@ -1,0 +1,57 @@
+#entrar a carpeta principal y extraer datos por variabel "t2m" x Dia 
+
+#!/bin/bash
+vars="daymin daymax"
+for var in $vars
+do
+ for yy in `seq -w 1950 1999`
+ do
+ cd $yy
+  for f in `ls -d */`
+  do
+  cdo -b F64 -addc,-273.15 -${var} -selvar,t2m ${f:0:-1}/data.nc ./t2m_${f:0:-1}_${var}_dC.nc
+  done
+ cd ..
+ done
+done 
+ 
+# Separar de un archivo genral los datos x dia, primera parte es MAXIMO y la segunda es MINIMO 
+
+#!/bin/bash
+vars="daymax"
+for var in $vars
+do
+ for f in `ls -d *`
+  do
+  cdo -b f64 addc,-273.15 -selname,t2m -${var} ${f:0} max/${f:0:-3}_${var}_t2m_c.nc
+  done
+done 
+
+#!/bin/bash
+vars="daymin"
+for var in $vars
+do
+ for f in `ls -d *`
+  do
+  cdo -b f64 addc,-273.15 -selname,t2m -${var} ${f:0} min/${f:0:-3}_${var}_t2m_c.nc
+  done
+done 
+
+#Extraer los dias x cada mes es sumatoria 
+
+#!/bin/bash
+for lpt in `ls -d *_UC_Months.nc`
+do
+ for les in {1..12}
+  do
+   cdo selmon,${les} ${lpt:0:-13}_UC_Months.nc ${les}_UC_${lpt:0:-13}.nc
+  done
+done 
+
+#Juntar todos los archivos generales en uno solo MEGA Archvio general
+
+cdo mergetime filename.nc newfilename.nc
+
+#realizar sumatoria de archivos x mes corespondiente 
+
+cdo monsum filename.nc newfilename.nc
