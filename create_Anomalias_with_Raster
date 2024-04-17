@@ -1,0 +1,44 @@
+#import module
+import arcpy
+from arcpy import env
+from arcpy.sa import *
+
+#Check ou any necesary licenses
+arcpy.CheckOutExtension("spatial")
+
+
+#Local vairbales: Input
+# Pronosticos
+Pro1 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\output\\enero analogo.tif"
+Pro2 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\output\\febrero analogo.tif"
+Pro3 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\output\\marzo analogo.tif"
+# Climatologia
+Clim1 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\input\\Livneh-CHIRPSPrec_Mex1951-1980Clim01.tif"
+Clim2 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\input\\Livneh-CHIRPSPrec_Mex1951-1980Clim02.tif"
+Clim3 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\input\\Livneh-CHIRPSPrec_Mex1951-1980Clim03.tif"
+# Ouput
+les1 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\output\\enero analogo anomalia.tif"
+les2 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\output\\febrero analogo anomalia.tif"
+les3 = r"C:\\Users\\Usuario Temporal\\Documents\\ArcGIS\\output\\marzo analogo anomalia.tif"
+
+#Convertir en raster
+    #pronostico
+ang1 = Raster(Pro1)
+ang2 = Raster(Pro2)
+ang3 = Raster(Pro3)
+
+    #climatologia
+stch1 = Raster(Clim1)
+stch2 = Raster(Clim2)
+stch3 = Raster(Clim3)
+
+# Process: Raster Calculator les1
+arcpy.gp.RasterCalculator_sa("Con(IsNull(ang1 / stch1),0,((ang1 / stch1)-1)*100)", les1)
+
+# Process: Raster Calculator les2
+arcpy.gp.RasterCalculator_sa("Con(IsNull(ang2 / stch2),0,((ang2 / stch2)-1)*100)", les2)
+
+# Process: Raster Calculator les3
+arcpy.gp.RasterCalculator_sa("Con(IsNull(ang3 / stch3),0,((ang3 / stch3)-1)*100)", les3)
+
+
