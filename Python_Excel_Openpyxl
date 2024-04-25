@@ -1,0 +1,18 @@
+#import Libs
+import pandas as pd
+import openpyxl
+from openpyxl import Workbook
+
+#Var edit
+les = 1999
+
+#Call Document
+workbook3 = openpyxl.load_workbook('/home/arturo/Downloads/prb1.xlsx')
+#Select file 
+h=workbook3['CAL']
+#Selcect cell
+tt=h.cell(row=108, column=16)
+print(tt.value)
+tt.value = les
+#Save document
+workbook3.save('/home/arturo/Downloads/'+str(les)+'.xlsx')
