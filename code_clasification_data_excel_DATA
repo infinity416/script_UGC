@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Apr 24 08:47:03 2024
+
+@author: arturo
+"""
+import pandas as pd
+import openpyxl
+from openpyxl import Workbook
+
+# doc =  pd.read_excel('/home/arturo/Downloads/RELACION INDICES_1950-2053_ENOS-Forecasts.xlsx',sheet_name='DATA')
+#Uso de pandas Input
+doc = pd.read_excel('/home/arturo/Downloads/prb1.xlsx', sheet_name='DATA')
+#Uso de Openpyxl Input 
+workbook3 = openpyxl.load_workbook('/home/arturo/Downloads/prb1.xlsx',  data_only=True)
+h = workbook3.active
+h = workbook3['DATA']
+t1=h['B1'].value
+t2=h['C1'].value
+t3=h['D1'].value
+t4=h['E1'].value
+t5=h['F1'].value
+t6=h['G1'].value
+t7=h['H1'].value
+t8=h['I1'].value
+t9=h['J1'].value
+t10=h['K1'].value
+t11=h['L1'].value
+t12=h['M1'].value
+t13=h['N1'].value
+# print(h[h['B1']==2024].value)
+ind=doc[doc[t1] == 2024]
+ide=ind.index[0]
+# print(ide+2) 
+xn=ide+2
+# print(h.cell(row=xn, column=2).value)
+# print(h.cell(row=xn, column=3).value)
+# print(h.cell(row=xn, column=4).value)
+# print(h.cell(row=xn, column=5).value)
+# print(h.cell(row=xn, column=6).value)
+# print(h.cell(row=xn, column=7).value)
+# print(h.cell(row=xn, column=8).value)
+# print(h.cell(row=xn, column=9).value)
+# print(h.cell(row=xn, column=10).value)
+# print(h.cell(row=xn, column=11).value)
+# print(h.cell(row=xn, column=12).value)
+# print(h.cell(row=xn, column=13).value)
+# print(h.cell(row=xn, column=14).value)
+
+d1=h.cell(row=xn, column=2).value
+d2=h.cell(row=xn, column=3).value
+d3=h.cell(row=xn, column=4).value
+d4=h.cell(row=xn, column=5).value
+d5=h.cell(row=xn, column=6).value
+d6=h.cell(row=xn, column=7).value
+d7=h.cell(row=xn, column=8).value
+d8=h.cell(row=xn, column=9).value
+d9=h.cell(row=xn, column=10).value
+d10=h.cell(row=xn, column=11).value
+d11=h.cell(row=xn, column=12).value
+d12=h.cell(row=xn, column=13).value
+d13=h.cell(row=xn, column=14).value
+print(d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13)
+
+
+fil = [d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13]
+tt = 0
+for exis in fil:
+    # s='d'+str(exis)
+    if exis == None:
+        print("vacia "+ str(exis))
+        break
+    else:
+        print("Tiene datos "+ str(exis))
+        tt = tt+1
+        print(tt)  
+    if tt == 12:
+        print("completo")
+    else: 
+        print("Lefaltan datos")
+# print(h)
+# #print(h.cell(row=1 , column=10))
+# lg=h.cell(row=1, value='A')
+# print(lg.column)
+# h['A'].values_counts()
+# print(h['A1':'B2'].tuple)
+# lok=h['A1':'B2']
+
+# doc =  pd.read_excel('/home/arturo/Downloads/RELACION INDICES_1950-2053_ENOS-Forecasts.xlsx',)
+# print(doc)
+# C=doc.value_counts('A')
+# print(C)
+#yy = doc_exe.Year.isin([])
+#print (yy)
+# yy = doc [["Year"]]
+# print(yy)
+
+# ppp = doc.iloc[1]
+# print(ppp)
+
+
+# les = yy.loc['Ye']
+# print(les)
+# doc.to_csv('/home/arturo/Downloads/prb10.xlsx') 
