@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 30 08:36:12 2024
+
+@author: arturo
+"""
+
+import pandas as pd
+import openpyxl
+from openpyxl import Workbook
+
+# doc =  pd.read_excel('/home/arturo/Downloads/RELACION INDICES_1950-2053_ENOS-Forecasts.xlsx',sheet_name='DATA')
+#Uso de pandas Input
+doc = pd.read_excel('/home/arturo/Downloads/prb1.xlsx', sheet_name='DATA')
+#Uso de Openpyxl Input 
+workbook3 = openpyxl.load_workbook('/home/arturo/Downloads/prb1a.xlsx',  data_only=True)
+h = workbook3.active
+h = workbook3['DATA']
+t1=h['B1'].value
+t2=h['C1'].value
+t3=h['D1'].value
+t4=h['E1'].value
+t5=h['F1'].value
+t6=h['G1'].value
+t7=h['H1'].value
+t8=h['I1'].value
+t9=h['J1'].value
+t10=h['K1'].value
+t11=h['L1'].value
+t12=h['M1'].value
+t13=h['N1'].value
+
+for x in doc[t1].values:
+    if x <= 2027:
+        ind=doc[doc[t1] == x]
+        ide=ind.index[0]
+        xn=ide+2
+        # print("si lo es ", xn)
+        d2=h.cell(row=xn, column=2).value
+        # ingraL=h.cell(row=xn, column=4)
+        # ingraG=h.cell(row=xn, column=4).value
+        # print("EL VAlor es: ",ingraL, ingraG)
+        d3=h.cell(row=xn, column=3).value
+        d4=h.cell(row=xn, column=4).value
+        d5=h.cell(row=xn, column=5).value
+        d6=h.cell(row=xn, column=6).value
+        d7=h.cell(row=xn, column=7).value
+        d8=h.cell(row=xn, column=8).value
+        d9=h.cell(row=xn, column=9).value
+        d10=h.cell(row=xn, column=10).value
+        d11=h.cell(row=xn, column=11).value
+        d12=h.cell(row=xn, column=12).value
+        d13=h.cell(row=xn, column=13).value
+        d14=h.cell(row=xn, column=14).value
+        #print(d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14)
+        cadena=[d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14]
+        #print(cadena)
+        T=0
+        S=0
+        for L in cadena:
+            S=S+1
+            if L == None:
+                print("no ahi dato", L)
+                print("Agregar valor para el campo: ")
+                ddato = int(input())
+                raw=S+1
+                cel=h.cell(row=xn, column=raw)
+                #print(cel, S, d5,d58)
+                cel.value= ddato
+                workbook3.save('/home/arturo/Downloads/prb1a.xlsx')
+                break
+            else:
+                T=T+1
+                if T == 13:
+                    print("Linea completa de ",d2)
+                    
+    else:
+        print("ahi fue...")
