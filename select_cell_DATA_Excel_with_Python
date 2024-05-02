@@ -61,19 +61,19 @@ for x in doc[t1].values:
         for L in cadena:
             S=S+1
             if L == None:
-                print("no ahi dato", L)
+                #print("no ahi dato", L)
                 print("Agregar valor para el campo: ")
-                ddato = int(input())
+                ddato = float(input())
                 raw=S+1
                 cel=h.cell(row=xn, column=raw)
                 #print(cel, S, d5,d58)
                 cel.value= ddato
                 workbook3.save('/home/arturo/Downloads/prb1a.xlsx')
-                break
+                print("Se a Guardado y Actualizado")
             else:
                 T=T+1
                 if T == 13:
-                    print("Linea completa de ",d2)
+                    print("Año "+str(d2)+" esta completo.")
                     
     else:
-        print("ahi fue...")
+        print("No hay mas datos que mostrar.")
